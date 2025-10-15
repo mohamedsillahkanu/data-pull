@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIV Testing Dashboard</title>
+    <link rel="stylesheet" href="dashboard-styles.css">
+</head>
+<body>
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <div class="logo-container">
+                <div class="logo-box">
+                    <img src="NMCP.png" alt="NMCP Logo" class="logo-img" onerror="this.style.display='none'">
+                </div>
+                <div class="logo-box">
+                    <img src="ICF-SL.jpg" alt="ICF-SL Logo" class="logo-img" onerror="this.style.display='none'">
+                </div>
+            </div>
+
+            <div class="login-header">
+                <h1>🏥 HIV Testing Dashboard</h1>
+                <p>Real-time Data Monitoring & Analytics</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">DHIS2 Instance URL <span class="required">*</span></label>
+                    <input type="url" class="form-input" id="instanceUrl" placeholder="https://your-instance.dhis2.org" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Username <span class="required">*</span></label>
+                    <input type="text" class="form-input" id="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password <span class="required">*</span></label>
+                    <input type="password" class="form-input" id="password" required>
+                </div>
+
+                <button type="submit" class="btn-primary">Connect to Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="dashboard-content" id="dashboardContent">
+        <div class="dashboard-header">
+            <div class="header-left">
+                <h1>🏥 HIV Testing Survey Dashboard</h1>
+                <p class="current-date" id="currentDate"></p>
+            </div>
+            <div class="header-right">
+                <div class="last-updated">
+                    <span class="label">Last Updated:</span>
+                    <span class="time" id="lastUpdated">--:--:--</span>
+                </div>
+                <button class="refresh-btn" id="refreshBtn" onclick="applyFilters()">
+                    <span class="refresh-icon">🔄</span> Refresh
+                </button>
+                <button class="logout-btn" id="logoutBtn">Logout</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Filters Section -->
+            <div class="filters-card">
+                <div class="filters-header">
+                    <h2>🔍 Filters</h2>
+                    <button class="reset-filters-btn" onclick="resetFilters()">↺ Reset All</button>
+                </div>
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label class="filter-label">Organisation Unit</label>
+                        <select class="filter-select" id="orgUnitFilter" multiple size="5">
+                            <option value="ALL" selected>All Organisation Units</option>
+                        </select>
+                        <div class="filter-actions">
+                            <button class="filter-btn" onclick="selectAllOrgUnits()">Select All</button>
+                            <button class="filter-btn" onclick="clearAllOrgUnits()">Clear All</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Year</label>
+                        <select class="filter-select" id="yearFilter">
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Month</label>
+                        <select class="filter-select" id="monthFilter">
+                            <option value="">All Months</option>
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group" style="display: flex; align-items: flex-end;">
+                        <button class="apply-filters-btn" onclick="applyFilters()">
+                            ✓ Apply Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="cards-grid">
+                <div class="metric-card blue">
+                    <div class="card-icon">👥</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Clients Tested</h3>
+                        <div class="card-value" id="totalTested">--</div>
+                        <div class="card-subtitle">Total clients tested for HIV</div>
+                    </div>
+                </div>
+
+                <div class="metric-card green">
+                    <div class="card-icon">✅</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Negative Results</h3>
+                        <div class="card-value" id="negativeCount">--</div>
+                        <div class="card-subtitle">HIV Negative tests</div>
+                    </div>
+                </div>
+
+                <div class="metric-card red">
+                    <div class="card-icon">⚠️</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Positive Results</h3>
+                        <div class="card-value" id="positiveCount">--</div>
+                        <div class="card-subtitle">HIV Positive tests</div>
+                    </div>
+                </div>
+
+                <div class="metric-card yellow">
+                    <div class="card-icon">❓</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Inconclusive</h3>
+                        <div class="card-value" id="inconclusiveCount">--</div>
+                        <div class="card-subtitle">Inconclusive results</div>
+                    </div>
+                </div>
+
+                <div class="metric-card purple">
+                    <div class="card-icon">👤</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Average Age</h3>
+                        <div class="card-value" id="avgAge">--</div>
+                        <div class="card-subtitle">Client average age</div>
+                    </div>
+                </div>
+
+                <div class="metric-card teal">
+                    <div class="card-icon">💬</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Counseling Sessions</h3>
+                        <div class="card-value" id="counselingTotal">--</div>
+                        <div class="card-subtitle">Total counseling provided</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>📊 Test Results Distribution</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="resultsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h2>💬 Counseling Types</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="counselingChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>📋 Detailed Data by Organisation Unit</h2>
+                    <div class="card-actions">
+                        <button class="action-btn" onclick="exportTableToCSV()">
+                            📥 Export CSV
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="data-table" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>Organisation Unit</th>
+                                <th>Period</th>
+                                <th>Clients Tested</th>
+                                <th>Positive</th>
+                                <th>Negative</th>
+                                <th>Inconclusive</th>
+                                <th>Avg Age</th>
+                                <th>Counseling</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <tr>
+                                <td colspan="8" class="loading-cell">Apply filters to load data...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Trend Analysis -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>📈 Monthly Trend Analysis</h2>
+                </div>
+                <div class="chart-container" style="height: 400px;">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Activity Log -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>📝 Activity Log</h2>
+                </div>
+                <div class="activity-log" id="activityLog">
+                    <div class="activity-item">
+                        <span class="activity-time">--:--:--</span>
+                        <span class="activity-text">Ready to load data. Apply filters to begin.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="dashboard-script.js"></script>
+</body>
+</html>
