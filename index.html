@@ -21,8 +21,8 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
-            color: #e0e7ff;
+            background: linear-gradient(135deg, #2c6693 0%, #1f4a6a 100%);
+            color: #333;
             line-height: 1.6;
         }
 
@@ -41,13 +41,15 @@
         }
 
         .login-card {
-            background: rgba(30, 58, 138, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            border-radius: 16px;
+            background: #ffffff;
+            border: 1px solid #e3f2fd;
+            border-radius: 12px;
             padding: 50px;
             width: 100%;
             max-width: 500px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
@@ -62,9 +64,9 @@
         .logo-box {
             width: 120px;
             height: 120px;
-            background: rgba(30, 64, 175, 0.4);
-            border: 2px solid rgba(96, 165, 250, 0.3);
-            border-radius: 12px;
+            background: #f5f5f5;
+            border: 2px solid #e3f2fd;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -74,8 +76,8 @@
         }
 
         .logo-box:hover {
-            border-color: #60a5fa;
-            background: rgba(59, 130, 246, 0.3);
+            border-color: #2c6693;
+            background: #e3f2fd;
             transform: scale(1.05);
         }
 
@@ -93,13 +95,12 @@
         .login-header h1 {
             font-size: 32px;
             font-weight: 700;
-            color: #ffffff;
+            color: #2c6693;
             margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .login-header p {
-            color: #bfdbfe;
+            color: #666;
             font-size: 14px;
         }
 
@@ -111,19 +112,17 @@
             display: block;
             font-weight: 600;
             margin-bottom: 8px;
-            color: #bfdbfe;
+            color: #333;
             font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .form-input {
             width: 100%;
             padding: 14px 16px;
-            background: rgba(30, 64, 175, 0.4);
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            border-radius: 8px;
-            color: #ffffff;
+            background: #ffffff;
+            border: 1px solid #bbdefb;
+            border-radius: 6px;
+            color: #333;
             font-size: 16px;
             transition: all 0.3s ease;
             font-family: inherit;
@@ -131,34 +130,29 @@
 
         .form-input:focus {
             outline: none;
-            border-color: #60a5fa;
-            background: rgba(30, 64, 175, 0.6);
-            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
-        }
-
-        .form-input::placeholder {
-            color: #93c5fd;
+            border-color: #2c6693;
+            box-shadow: 0 0 0 3px rgba(44, 102, 147, 0.1);
         }
 
         .btn-primary {
             width: 100%;
             padding: 14px 24px;
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: #2c6693;
             color: #ffffff;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
         }
 
         .btn-primary:hover:not(:disabled) {
+            background: #1f4a6a;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 8px 25px rgba(44, 102, 147, 0.4);
         }
 
         .btn-primary:disabled {
@@ -167,13 +161,13 @@
         }
 
         .required {
-            color: #93c5fd;
+            color: #d32f2f;
         }
 
         .dashboard-content {
             display: none;
             min-height: 100vh;
-            background: transparent;
+            background: #f5f7fa;
         }
 
         .dashboard-content.show {
@@ -181,13 +175,9 @@
         }
 
         .dashboard-header {
-            background: rgba(30, 58, 138, 0.6);
-            backdrop-filter: blur(10px);
-            padding: 25px 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            border-radius: 16px;
-            margin-bottom: 30px;
+            background: #ffffff;
+            padding: 20px 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -196,14 +186,13 @@
         }
 
         .header-left h1 {
-            font-size: 32px;
-            color: #ffffff;
+            font-size: 28px;
+            color: #2c6693;
             margin-bottom: 5px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .current-date {
-            color: #bfdbfe;
+            color: #666;
             font-size: 14px;
         }
 
@@ -211,33 +200,31 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            flex-wrap: wrap;
         }
 
         .last-updated {
-            background: rgba(59, 130, 246, 0.2);
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            padding: 10px 18px;
-            border-radius: 8px;
+            background: #e3f2fd;
+            padding: 8px 16px;
+            border-radius: 6px;
             font-size: 14px;
         }
 
         .last-updated .label {
-            color: #bfdbfe;
+            color: #666;
             margin-right: 5px;
         }
 
         .last-updated .time {
-            color: #ffffff;
+            color: #2c6693;
             font-weight: 600;
         }
 
         .refresh-btn {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: #2c6693;
             color: #ffffff;
             border: none;
             padding: 10px 20px;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -245,12 +232,12 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
         .refresh-btn:hover {
+            background: #1f4a6a;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 4px 12px rgba(44, 102, 147, 0.3);
         }
 
         .refresh-btn.loading .refresh-icon {
@@ -263,11 +250,11 @@
         }
 
         .logout-btn {
-            background: rgba(30, 64, 175, 0.4);
-            color: #bfdbfe;
-            border: 1px solid rgba(96, 165, 250, 0.3);
+            background: #ffffff;
+            color: #2c6693;
+            border: 1px solid #e3f2fd;
             padding: 10px 20px;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -275,18 +262,15 @@
         }
 
         .logout-btn:hover {
-            border-color: #60a5fa;
-            background: rgba(30, 64, 175, 0.6);
-            color: #ffffff;
+            border-color: #2c6693;
+            background: #f5f7fa;
         }
 
         .filters-card {
-            background: rgba(30, 58, 138, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(96, 165, 250, 0.3);
+            background: #ffffff;
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
         }
 
@@ -295,22 +279,20 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(96, 165, 250, 0.2);
         }
 
         .filters-header h2 {
             font-size: 20px;
-            color: #ffffff;
+            color: #2c6693;
             font-weight: 700;
         }
 
         .reset-filters-btn {
             padding: 8px 16px;
-            background: rgba(30, 64, 175, 0.4);
-            color: #bfdbfe;
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            border-radius: 8px;
+            background: #6e7681;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -318,15 +300,14 @@
         }
 
         .reset-filters-btn:hover {
-            background: rgba(30, 64, 175, 0.6);
-            color: #ffffff;
+            background: #57606a;
         }
 
         .filters-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 20px;
-            margin-bottom: 20px;
+            align-items: start;
         }
 
         .filter-group {
@@ -336,20 +317,18 @@
 
         .filter-label {
             font-weight: 600;
-            color: #bfdbfe;
+            color: #333;
             font-size: 14px;
             margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .filter-select {
             width: 100%;
             padding: 10px 14px;
-            background: rgba(30, 64, 175, 0.4);
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            border-radius: 8px;
-            color: #ffffff;
+            background: #ffffff;
+            border: 1px solid #bbdefb;
+            border-radius: 6px;
+            color: #333;
             font-size: 14px;
             transition: all 0.3s ease;
             font-family: inherit;
@@ -357,35 +336,51 @@
 
         .filter-select:focus {
             outline: none;
-            border-color: #60a5fa;
-            background: rgba(30, 64, 175, 0.6);
-            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+            border-color: #2c6693;
+            box-shadow: 0 0 0 3px rgba(44, 102, 147, 0.1);
         }
 
-        .filter-select option {
-            background: #1e3a8a;
+        .filter-actions {
+            display: flex;
+            gap: 5px;
+            margin-top: 8px;
+        }
+
+        .filter-btn {
+            padding: 6px 12px;
+            background: #e3f2fd;
+            color: #2c6693;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex: 1;
+        }
+
+        .filter-btn:hover {
+            background: #2c6693;
             color: #ffffff;
         }
 
         .apply-filters-btn {
             width: 100%;
-            padding: 14px 24px;
-            background: #4a7c9e;
+            padding: 12px 24px;
+            background: #2c6693;
             color: #ffffff;
             border: none;
             border-radius: 6px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            letter-spacing: 0.3px;
-            box-shadow: 0 2px 8px rgba(74, 124, 158, 0.3);
         }
 
         .apply-filters-btn:hover {
-            background: #3d6580;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(74, 124, 158, 0.4);
+            background: #1f4a6a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 102, 147, 0.3);
         }
 
         .cards-grid {
@@ -396,30 +391,28 @@
         }
 
         .metric-card {
-            background: rgba(30, 58, 138, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(96, 165, 250, 0.3);
+            background: #ffffff;
             border-radius: 12px;
             padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
             gap: 20px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.6s ease-out;
         }
 
         .metric-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 28px rgba(59, 130, 246, 0.3);
-            border-color: rgba(96, 165, 250, 0.5);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .metric-card.blue { border-left: 4px solid #3b82f6; }
-        .metric-card.green { border-left: 4px solid #10b981; }
-        .metric-card.red { border-left: 4px solid #ef4444; }
-        .metric-card.yellow { border-left: 4px solid #fbbf24; }
-        .metric-card.purple { border-left: 4px solid #a78bfa; }
-        .metric-card.teal { border-left: 4px solid #06b6d4; }
+        .metric-card.blue { border-left: 4px solid #2c6693; }
+        .metric-card.green { border-left: 4px solid #2ea043; }
+        .metric-card.red { border-left: 4px solid #dc3545; }
+        .metric-card.yellow { border-left: 4px solid #ffc107; }
+        .metric-card.purple { border-left: 4px solid #6f42c1; }
+        .metric-card.teal { border-left: 4px solid #00bcd4; }
 
         .card-icon {
             font-size: 48px;
@@ -432,34 +425,30 @@
 
         .card-title {
             font-size: 14px;
-            color: #bfdbfe;
+            color: #666;
             margin-bottom: 8px;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .card-value {
             font-size: 36px;
             font-weight: 700;
-            color: #ffffff;
+            color: #2c6693;
             margin-bottom: 5px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .card-subtitle {
             font-size: 12px;
-            color: #93c5fd;
+            color: #999;
         }
 
         .dashboard-card {
-            background: rgba(30, 58, 138, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(96, 165, 250, 0.3);
+            background: #ffffff;
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
+            animation: fadeInUp 0.6s ease-out;
         }
 
         .card-header {
@@ -468,12 +457,12 @@
             align-items: center;
             margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 2px solid rgba(96, 165, 250, 0.2);
+            border-bottom: 2px solid #f5f7fa;
         }
 
         .card-header h2 {
             font-size: 20px;
-            color: #ffffff;
+            color: #2c6693;
             font-weight: 700;
         }
 
@@ -484,10 +473,10 @@
 
         .action-btn {
             padding: 8px 16px;
-            background: rgba(59, 130, 246, 0.2);
-            color: #bfdbfe;
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            border-radius: 8px;
+            background: #e3f2fd;
+            color: #2c6693;
+            border: none;
+            border-radius: 6px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -495,9 +484,8 @@
         }
 
         .action-btn:hover {
-            background: rgba(59, 130, 246, 0.4);
+            background: #2c6693;
             color: #ffffff;
-            border-color: #60a5fa;
         }
 
         .table-container {
@@ -511,39 +499,36 @@
         }
 
         .data-table thead {
-            background: rgba(30, 64, 175, 0.5);
+            background: #f5f7fa;
         }
 
         .data-table th {
             padding: 12px 15px;
             text-align: left;
             font-weight: 600;
-            color: #bfdbfe;
-            border-bottom: 2px solid rgba(96, 165, 250, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 12px;
+            color: #2c6693;
+            border-bottom: 2px solid #e3f2fd;
         }
 
         .data-table td {
             padding: 12px 15px;
-            border-bottom: 1px solid rgba(96, 165, 250, 0.1);
-            color: #e0e7ff;
+            border-bottom: 1px solid #f5f7fa;
+            color: #333;
         }
 
         .data-table tbody tr:hover {
-            background: rgba(59, 130, 246, 0.1);
+            background: #f5f7fa;
         }
 
         .loading-cell {
             text-align: center;
-            color: #93c5fd;
+            color: #999;
             padding: 40px !important;
         }
 
-        .positive-cell { color: #ef4444; font-weight: 600; }
-        .negative-cell { color: #10b981; font-weight: 600; }
-        .inconclusive-cell { color: #fbbf24; font-weight: 600; }
+        .positive-cell { color: #dc3545; font-weight: 600; }
+        .negative-cell { color: #2ea043; font-weight: 600; }
+        .inconclusive-cell { color: #ffc107; font-weight: 600; }
 
         .charts-grid {
             display: grid;
@@ -565,8 +550,8 @@
 
         .activity-item {
             padding: 12px 15px;
-            border-left: 3px solid #3b82f6;
-            background: rgba(59, 130, 246, 0.1);
+            border-left: 3px solid #2c6693;
+            background: #f5f7fa;
             margin-bottom: 10px;
             border-radius: 4px;
             display: flex;
@@ -574,13 +559,13 @@
         }
 
         .activity-time {
-            color: #60a5fa;
+            color: #2c6693;
             font-weight: 600;
             font-size: 13px;
         }
 
         .activity-text {
-            color: #bfdbfe;
+            color: #666;
             font-size: 14px;
         }
 
@@ -588,17 +573,15 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(30, 58, 138, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(96, 165, 250, 0.3);
+            background: #ffffff;
+            border: 1px solid #e3f2fd;
             padding: 16px 24px;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             display: none;
             z-index: 3000;
             animation: slideInRight 0.3s ease-out;
             min-width: 300px;
-            color: #e0e7ff;
         }
 
         .notification.show {
@@ -606,15 +589,20 @@
         }
 
         .notification.success {
-            border-left: 4px solid #10b981;
+            border-left: 4px solid #2ea043;
         }
 
         .notification.error {
-            border-left: 4px solid #ef4444;
+            border-left: 4px solid #d32f2f;
         }
 
         .notification.info {
-            border-left: 4px solid #60a5fa;
+            border-left: 4px solid #2c6693;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes fadeInUp {
@@ -713,30 +701,41 @@
     </div>
 
     <div class="dashboard-content" id="dashboardContent">
-        <div class="container">
-            <div class="dashboard-header">
-                <div class="header-left">
-                    <h1>🏥 HIV Testing Survey Dashboard</h1>
-                    <p class="current-date" id="currentDate"></p>
-                </div>
-                <div class="header-right">
-                    <div class="last-updated">
-                        <span class="label">Last Updated:</span>
-                        <span class="time" id="lastUpdated">--:--:--</span>
-                    </div>
-                    <button class="refresh-btn" id="refreshBtn" onclick="applyFilters()">
-                        <span class="refresh-icon">🔄</span> Refresh
-                    </button>
-                    <button class="logout-btn" id="logoutBtn">Logout</button>
-                </div>
+        <div class="dashboard-header">
+            <div class="header-left">
+                <h1>🏥 HIV Testing Survey Dashboard</h1>
+                <p class="current-date" id="currentDate"></p>
             </div>
+            <div class="header-right">
+                <div class="last-updated">
+                    <span class="label">Last Updated:</span>
+                    <span class="time" id="lastUpdated">--:--:--</span>
+                </div>
+                <button class="refresh-btn" id="refreshBtn" onclick="applyFilters()">
+                    <span class="refresh-icon">🔄</span> Refresh
+                </button>
+                <button class="logout-btn" id="logoutBtn">Logout</button>
+            </div>
+        </div>
 
+        <div class="container">
             <div class="filters-card">
                 <div class="filters-header">
                     <h2>🔍 Filters</h2>
                     <button class="reset-filters-btn" onclick="resetFilters()">↺ Reset All</button>
                 </div>
                 <div class="filters-grid">
+                    <div class="filter-group">
+                        <label class="filter-label">Organisation Unit</label>
+                        <select class="filter-select" id="orgUnitFilter" multiple size="5">
+                            <option value="ALL" selected>All Organisation Units</option>
+                        </select>
+                        <div class="filter-actions">
+                            <button class="filter-btn" onclick="selectAllOrgUnits()">Select All</button>
+                            <button class="filter-btn" onclick="clearAllOrgUnits()">Clear All</button>
+                        </div>
+                    </div>
+
                     <div class="filter-group">
                         <label class="filter-label">Year</label>
                         <select class="filter-select" id="yearFilter">
@@ -765,34 +764,6 @@
                             <option value="10">October</option>
                             <option value="11">November</option>
                             <option value="12">December</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-group" id="level1Group" style="display: none;">
-                        <label class="filter-label" id="level1Label">Level 1</label>
-                        <select class="filter-select" id="level1Filter" onchange="handleLevel1Change()">
-                            <option value="all">All</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-group" id="level2Group" style="display: none;">
-                        <label class="filter-label" id="level2Label">Level 2</label>
-                        <select class="filter-select" id="level2Filter" onchange="handleLevel2Change()">
-                            <option value="all">All</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-group" id="level3Group" style="display: none;">
-                        <label class="filter-label" id="level3Label">Level 3</label>
-                        <select class="filter-select" id="level3Filter" onchange="handleLevel3Change()">
-                            <option value="all">All</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-group" id="level4Group" style="display: none;">
-                        <label class="filter-label" id="level4Label">Level 4</label>
-                        <select class="filter-select" id="level4Filter" onchange="applyFilters()">
-                            <option value="all">All</option>
                         </select>
                     </div>
 
@@ -939,6 +910,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script>
+        const GOOGLE_APPS_SCRIPT_PROXY = 'https://script.google.com/macros/s/AKfycbyRXc68PYSmDSCYPakAS8Gc9R00kRjmsMYoDujPYMItyquXfwMAJUtRqXLiDlNWbSfDQQ/exec';
+
         const DATA_ELEMENTS = {
             clientsTested: 'kLmN8oPqR3s',
             testResult: 'WvYDK6cYopD',
@@ -961,27 +934,21 @@
             isLoggedIn: false,
             orgUnits: [],
             charts: {},
-            currentData: [],
-            hierarchyMaps: {
-                level1_level2: {},
-                level2_level3: {},
-                level3_level4: {}
-            },
-            levelFields: { level1: null, level2: null, level3: null, level4: null }
+            currentData: []
         };
+
+        function makeProxyRequest(targetUrl, options = {}) {
+            let proxyUrl = `${GOOGLE_APPS_SCRIPT_PROXY}?url=${encodeURIComponent(targetUrl)}`;
+            if (options.headers && options.headers.Authorization) {
+                proxyUrl += `&Authorization=${encodeURIComponent(options.headers.Authorization)}`;
+            }
+            return fetch(proxyUrl, { method: options.method || 'GET', body: options.body });
+        }
 
         async function fetchWithAuth(url, options = {}) {
             if (!state.config) throw new Error('Not authenticated');
             const authHeader = 'Basic ' + btoa(`${state.config.username}:${state.config.password}`);
-            return fetch(url, { 
-                ...options, 
-                headers: { 
-                    'Authorization': authHeader, 
-                    'Content-Type': 'application/json', 
-                    ...options.headers 
-                },
-                mode: 'cors'
-            });
+            return makeProxyRequest(url, { ...options, headers: { 'Authorization': authHeader, 'Content-Type': 'application/json', ...options.headers } });
         }
 
         function showNotification(message, type) {
@@ -1032,15 +999,19 @@
         async function loadOrganisationUnits() {
             try {
                 addActivityLog('Loading organisation units...');
-                const url = `${state.config.instanceUrl}/api/organisationUnits.json?fields=id,displayName,level,parent[id]&paging=false`;
+                const url = `${state.config.instanceUrl}/api/organisationUnits.json?fields=id,displayName&paging=false`;
                 const response = await fetchWithAuth(url);
                 if (!response.ok) throw new Error('Failed to fetch organisation units');
                 const data = await response.json();
                 state.orgUnits = data.organisationUnits || [];
-                
-                detectHierarchy();
-                populateHierarchyFilters();
-                
+                const select = document.getElementById('orgUnitFilter');
+                select.innerHTML = '<option value="ALL">All Organisation Units</option>';
+                state.orgUnits.forEach(ou => {
+                    const option = document.createElement('option');
+                    option.value = ou.id;
+                    option.textContent = ou.displayName;
+                    select.appendChild(option);
+                });
                 addActivityLog(`Loaded ${state.orgUnits.length} organisation units`);
             } catch (error) {
                 console.error('Error loading org units:', error);
@@ -1048,204 +1019,28 @@
             }
         }
 
-        function detectHierarchy() {
-            const levels = {};
-            
-            state.orgUnits.forEach(ou => {
-                const level = ou.level;
-                if (!levels[level]) levels[level] = [];
-                levels[level].push(ou);
-            });
-            
-            const sortedLevels = Object.keys(levels).sort((a, b) => a - b);
-            
-            if (sortedLevels.length >= 4) {
-                state.levelFields.level1 = sortedLevels[0];
-                state.levelFields.level2 = sortedLevels[1];
-                state.levelFields.level3 = sortedLevels[2];
-                state.levelFields.level4 = sortedLevels[3];
-            } else if (sortedLevels.length === 3) {
-                state.levelFields.level1 = sortedLevels[0];
-                state.levelFields.level2 = sortedLevels[1];
-                state.levelFields.level3 = sortedLevels[2];
-            } else if (sortedLevels.length === 2) {
-                state.levelFields.level1 = sortedLevels[0];
-                state.levelFields.level2 = sortedLevels[1];
-            }
-            
-            state.orgUnits.forEach(ou => {
-                if (ou.parent && ou.parent.id) {
-                    const parent = state.orgUnits.find(p => p.id === ou.parent.id);
-                    if (parent) {
-                        if (parent.level == state.levelFields.level1 && ou.level == state.levelFields.level2) {
-                            if (!state.hierarchyMaps.level1_level2[parent.id]) {
-                                state.hierarchyMaps.level1_level2[parent.id] = new Set();
-                            }
-                            state.hierarchyMaps.level1_level2[parent.id].add(ou.id);
-                        }
-                        
-                        if (parent.level == state.levelFields.level2 && ou.level == state.levelFields.level3) {
-                            if (!state.hierarchyMaps.level2_level3[parent.id]) {
-                                state.hierarchyMaps.level2_level3[parent.id] = new Set();
-                            }
-                            state.hierarchyMaps.level2_level3[parent.id].add(ou.id);
-                        }
-                        
-                        if (parent.level == state.levelFields.level3 && ou.level == state.levelFields.level4) {
-                            if (!state.hierarchyMaps.level3_level4[parent.id]) {
-                                state.hierarchyMaps.level3_level4[parent.id] = new Set();
-                            }
-                            state.hierarchyMaps.level3_level4[parent.id].add(ou.id);
-                        }
-                    }
-                }
-            });
-        }
-
-        function populateHierarchyFilters() {
-            if (state.levelFields.level1) {
-                const level1Units = state.orgUnits.filter(ou => ou.level == state.levelFields.level1);
-                const level1Filter = document.getElementById('level1Filter');
-                level1Units.forEach(ou => {
-                    const option = document.createElement('option');
-                    option.value = ou.id;
-                    option.textContent = ou.displayName;
-                    level1Filter.appendChild(option);
-                });
-                document.getElementById('level1Group').style.display = 'block';
-                document.getElementById('level1Label').textContent = `Level ${state.levelFields.level1}`;
-            }
-            
-            if (state.levelFields.level2) {
-                document.getElementById('level2Group').style.display = 'block';
-                document.getElementById('level2Label').textContent = `Level ${state.levelFields.level2}`;
-            }
-            
-            if (state.levelFields.level3) {
-                document.getElementById('level3Group').style.display = 'block';
-                document.getElementById('level3Label').textContent = `Level ${state.levelFields.level3}`;
-            }
-            
-            if (state.levelFields.level4) {
-                document.getElementById('level4Group').style.display = 'block';
-                document.getElementById('level4Label').textContent = `Level ${state.levelFields.level4}`;
+        function selectAllOrgUnits() {
+            const select = document.getElementById('orgUnitFilter');
+            for (let i = 0; i < select.options.length; i++) {
+                select.options[i].selected = true;
             }
         }
 
-        function handleLevel1Change() {
-            const selectedLevel1 = document.getElementById('level1Filter').value;
-            const level2Filter = document.getElementById('level2Filter');
-            const level3Filter = document.getElementById('level3Filter');
-            const level4Filter = document.getElementById('level4Filter');
-            
-            level2Filter.innerHTML = '<option value="all">All</option>';
-            level3Filter.innerHTML = '<option value="all">All</option>';
-            level4Filter.innerHTML = '<option value="all">All</option>';
-            
-            if (selectedLevel1 !== 'all' && state.hierarchyMaps.level1_level2[selectedLevel1]) {
-                const childIds = Array.from(state.hierarchyMaps.level1_level2[selectedLevel1]);
-                const children = state.orgUnits.filter(ou => childIds.includes(ou.id)).sort((a, b) => a.displayName.localeCompare(b.displayName));
-                children.forEach(ou => {
-                    const option = document.createElement('option');
-                    option.value = ou.id;
-                    option.textContent = ou.displayName;
-                    level2Filter.appendChild(option);
-                });
-            } else if (selectedLevel1 === 'all' && state.levelFields.level2) {
-                const level2Units = state.orgUnits.filter(ou => ou.level == state.levelFields.level2).sort((a, b) => a.displayName.localeCompare(b.displayName));
-                level2Units.forEach(ou => {
-                    const option = document.createElement('option');
-                    option.value = ou.id;
-                    option.textContent = ou.displayName;
-                    level2Filter.appendChild(option);
-                });
+        function clearAllOrgUnits() {
+            const select = document.getElementById('orgUnitFilter');
+            for (let i = 0; i < select.options.length; i++) {
+                select.options[i].selected = false;
             }
-            
-            applyFilters();
-        }
-
-        function handleLevel2Change() {
-            const selectedLevel2 = document.getElementById('level2Filter').value;
-            const level3Filter = document.getElementById('level3Filter');
-            const level4Filter = document.getElementById('level4Filter');
-            
-            level3Filter.innerHTML = '<option value="all">All</option>';
-            level4Filter.innerHTML = '<option value="all">All</option>';
-            
-            if (selectedLevel2 !== 'all' && state.hierarchyMaps.level2_level3[selectedLevel2]) {
-                const childIds = Array.from(state.hierarchyMaps.level2_level3[selectedLevel2]);
-                const children = state.orgUnits.filter(ou => childIds.includes(ou.id)).sort((a, b) => a.displayName.localeCompare(b.displayName));
-                children.forEach(ou => {
-                    const option = document.createElement('option');
-                    option.value = ou.id;
-                    option.textContent = ou.displayName;
-                    level3Filter.appendChild(option);
-                });
-            } else if (selectedLevel2 === 'all' && state.levelFields.level3) {
-                const level3Units = state.orgUnits.filter(ou => ou.level == state.levelFields.level3).sort((a, b) => a.displayName.localeCompare(b.displayName));
-                level3Units.forEach(ou => {
-                    const option = document.createElement('option');
-                    option.value = ou.id;
-                    option.textContent = ou.displayName;
-                    level3Filter.appendChild(option);
-                });
-            }
-            
-            applyFilters();
-        }
-
-        function handleLevel3Change() {
-            const selectedLevel3 = document.getElementById('level3Filter').value;
-            const level4Filter = document.getElementById('level4Filter');
-            
-            level4Filter.innerHTML = '<option value="all">All</option>';
-            
-            if (selectedLevel3 !== 'all' && state.hierarchyMaps.level3_level4[selectedLevel3]) {
-                const childIds = Array.from(state.hierarchyMaps.level3_level4[selectedLevel3]);
-                const children = state.orgUnits.filter(ou => childIds.includes(ou.id)).sort((a, b) => a.displayName.localeCompare(b.displayName));
-                children.forEach(ou => {
-                    const option = document.createElement('option');
-                    option.value = ou.id;
-                    option.textContent = ou.displayName;
-                    level4Filter.appendChild(option);
-                });
-            } else if (selectedLevel3 === 'all' && state.levelFields.level4) {
-                const level4Units = state.orgUnits.filter(ou => ou.level == state.levelFields.level4).sort((a, b) => a.displayName.localeCompare(b.displayName));
-                level4Units.forEach(ou => {
-                    const option = document.createElement('option');
-                    option.value = ou.id;
-                    option.textContent = ou.displayName;
-                    level4Filter.appendChild(option);
-                });
-            }
-            
-            applyFilters();
+            select.options[0].selected = true;
         }
 
         function getSelectedOrgUnits() {
-            const level1 = document.getElementById('level1Filter').value;
-            const level2 = document.getElementById('level2Filter').value;
-            const level3 = document.getElementById('level3Filter').value;
-            const level4 = document.getElementById('level4Filter').value;
-            
-            let selectedUnits = [];
-            
-            if (level4 !== 'all') {
-                selectedUnits = [level4];
-            } else if (level3 !== 'all') {
-                const children = state.orgUnits.filter(ou => ou.level == state.levelFields.level4 && ou.parent && ou.parent.id === level3);
-                selectedUnits = children.length > 0 ? children.map(ou => ou.id) : [level3];
-            } else if (level2 !== 'all') {
-                const children = state.orgUnits.filter(ou => ou.level == state.levelFields.level3 && ou.parent && ou.parent.id === level2);
-                selectedUnits = children.length > 0 ? children.map(ou => ou.id) : [level2];
-            } else if (level1 !== 'all') {
-                const children = state.orgUnits.filter(ou => ou.level == state.levelFields.level2 && ou.parent && ou.parent.id === level1);
-                selectedUnits = children.length > 0 ? children.map(ou => ou.id) : [level1];
-            } else {
-                selectedUnits = state.orgUnits.map(ou => ou.id);
+            const select = document.getElementById('orgUnitFilter');
+            const selected = Array.from(select.selectedOptions).map(opt => opt.value);
+            if (selected.includes('ALL')) {
+                return state.orgUnits.map(ou => ou.id);
             }
-            
-            return selectedUnits;
+            return selected.filter(id => id !== 'ALL');
         }
 
         function getPeriodFromFilters() {
@@ -1320,12 +1115,11 @@
             const currentYear = new Date().getFullYear();
             document.getElementById('yearFilter').value = currentYear;
             document.getElementById('monthFilter').value = '';
-            document.getElementById('level1Filter').value = 'all';
-            document.getElementById('level2Filter').innerHTML = '<option value="all">All</option>';
-            document.getElementById('level3Filter').innerHTML = '<option value="all">All</option>';
-            document.getElementById('level4Filter').innerHTML = '<option value="all">All</option>';
-            
-            handleLevel1Change();
+            const select = document.getElementById('orgUnitFilter');
+            select.options[0].selected = true;
+            for (let i = 1; i < select.options.length; i++) {
+                select.options[i].selected = false;
+            }
             showNotification('Filters reset', 'info');
         }
 
@@ -1428,22 +1222,9 @@
                 type: 'doughnut',
                 data: {
                     labels: ['Positive', 'Negative', 'Inconclusive'],
-                    datasets: [{ 
-                        data: [positive, negative, inconclusive], 
-                        backgroundColor: ['#ef4444', '#10b981', '#fbbf24'],
-                        borderWidth: 0
-                    }]
+                    datasets: [{ data: [positive, negative, inconclusive], backgroundColor: ['rgba(220, 53, 69, 0.8)', 'rgba(46, 160, 67, 0.8)', 'rgba(255, 193, 7, 0.8)'], borderColor: ['rgba(220, 53, 69, 1)', 'rgba(46, 160, 67, 1)', 'rgba(255, 193, 7, 1)'], borderWidth: 2 }]
                 },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false, 
-                    plugins: { 
-                        legend: { 
-                            position: 'bottom',
-                            labels: { color: '#bfdbfe', padding: 15, font: { size: 13 } }
-                        } 
-                    } 
-                }
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
             });
         }
 
@@ -1455,31 +1236,9 @@
                 type: 'bar',
                 data: {
                     labels: ['Individual', 'Group', 'Couples'],
-                    datasets: [{ 
-                        label: 'Sessions', 
-                        data: [counselingTypes.individual, counselingTypes.group, counselingTypes.couples], 
-                        backgroundColor: ['#3b82f6', '#60a5fa', '#93c5fd'],
-                        borderWidth: 0
-                    }]
+                    datasets: [{ label: 'Sessions', data: [counselingTypes.individual, counselingTypes.group, counselingTypes.couples], backgroundColor: ['rgba(44, 102, 147, 0.8)', 'rgba(74, 144, 196, 0.8)', 'rgba(0, 188, 212, 0.8)'], borderColor: ['rgba(44, 102, 147, 1)', 'rgba(74, 144, 196, 1)', 'rgba(0, 188, 212, 1)'], borderWidth: 2 }]
                 },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false, 
-                    plugins: { 
-                        legend: { display: false } 
-                    }, 
-                    scales: { 
-                        y: { 
-                            beginAtZero: true,
-                            ticks: { color: '#bfdbfe' },
-                            grid: { color: 'rgba(191, 219, 254, 0.1)' }
-                        },
-                        x: {
-                            ticks: { color: '#bfdbfe' },
-                            grid: { display: false }
-                        }
-                    } 
-                }
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
             });
         }
 
@@ -1504,56 +1263,12 @@
                 data: {
                     labels: labels,
                     datasets: [
-                        { 
-                            label: 'Clients Tested', 
-                            data: testedData, 
-                            borderColor: '#3b82f6', 
-                            backgroundColor: 'rgba(59, 130, 246, 0.1)', 
-                            borderWidth: 3, 
-                            tension: 0.4,
-                            fill: true
-                        },
-                        { 
-                            label: 'Positive Results', 
-                            data: positiveData, 
-                            borderColor: '#ef4444', 
-                            backgroundColor: 'rgba(239, 68, 68, 0.1)', 
-                            borderWidth: 3, 
-                            tension: 0.4,
-                            fill: true
-                        },
-                        { 
-                            label: 'Negative Results', 
-                            data: negativeData, 
-                            borderColor: '#10b981', 
-                            backgroundColor: 'rgba(16, 185, 129, 0.1)', 
-                            borderWidth: 3, 
-                            tension: 0.4,
-                            fill: true
-                        }
+                        { label: 'Clients Tested', data: testedData, borderColor: 'rgba(44, 102, 147, 1)', backgroundColor: 'rgba(44, 102, 147, 0.1)', borderWidth: 3, tension: 0.4 },
+                        { label: 'Positive Results', data: positiveData, borderColor: 'rgba(220, 53, 69, 1)', backgroundColor: 'rgba(220, 53, 69, 0.1)', borderWidth: 3, tension: 0.4 },
+                        { label: 'Negative Results', data: negativeData, borderColor: 'rgba(46, 160, 67, 1)', backgroundColor: 'rgba(46, 160, 67, 0.1)', borderWidth: 3, tension: 0.4 }
                     ]
                 },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false, 
-                    plugins: { 
-                        legend: { 
-                            position: 'bottom',
-                            labels: { color: '#bfdbfe', font: { size: 13 } }
-                        } 
-                    }, 
-                    scales: { 
-                        y: { 
-                            beginAtZero: true,
-                            ticks: { color: '#bfdbfe' },
-                            grid: { color: 'rgba(191, 219, 254, 0.1)' }
-                        },
-                        x: {
-                            ticks: { color: '#bfdbfe' },
-                            grid: { display: false }
-                        }
-                    } 
-                }
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { beginAtZero: true } } }
             });
         }
 
@@ -1597,11 +1312,7 @@
                 showNotification('Connecting to DHIS2...', 'info');
                 const testUrl = `${instanceUrl}/api/me`;
                 const authHeader = 'Basic ' + btoa(`${username}:${password}`);
-                const response = await fetch(testUrl, { 
-                    method: 'GET', 
-                    headers: { 'Authorization': authHeader },
-                    mode: 'cors'
-                });
+                const response = await makeProxyRequest(testUrl, { method: 'GET', headers: { 'Authorization': authHeader } });
                 if (response.ok) {
                     const userData = await response.json();
                     state.config = config;
