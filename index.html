@@ -305,7 +305,7 @@
 
         .filters-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             align-items: start;
         }
@@ -313,6 +313,17 @@
         .filter-group {
             display: flex;
             flex-direction: column;
+        }
+
+        .filter-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .org-hierarchy {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
         .filter-label {
@@ -631,6 +642,10 @@
             .filters-grid {
                 grid-template-columns: 1fr 1fr;
             }
+            
+            .org-hierarchy {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
@@ -653,6 +668,10 @@
             }
 
             .filters-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .org-hierarchy {
                 grid-template-columns: 1fr;
             }
 
@@ -725,14 +744,49 @@
                     <button class="reset-filters-btn" onclick="resetFilters()">↺ Reset All</button>
                 </div>
                 <div class="filters-grid">
-                    <div class="filter-group">
-                        <label class="filter-label">Organisation Unit</label>
-                        <select class="filter-select" id="orgUnitFilter" multiple size="5">
-                            <option value="ALL" selected>All Organisation Units</option>
-                        </select>
-                        <div class="filter-actions">
-                            <button class="filter-btn" onclick="selectAllOrgUnits()">Select All</button>
-                            <button class="filter-btn" onclick="clearAllOrgUnits()">Clear All</button>
+                    <div class="filter-group full-width">
+                        <label class="filter-label">Organisation Unit Hierarchy</label>
+                        <div class="org-hierarchy" id="orgHierarchy">
+                            <div>
+                                <label class="filter-label" style="font-size: 12px; margin-bottom: 5px;">Level 1</label>
+                                <select class="filter-select" id="level1Filter" multiple size="4" onchange="handleLevelChange(1)">
+                                    <option value="ALL" selected>All Level 1</option>
+                                </select>
+                                <div class="filter-actions">
+                                    <button class="filter-btn" onclick="selectAllLevel(1)">All</button>
+                                    <button class="filter-btn" onclick="clearAllLevel(1)">Clear</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="filter-label" style="font-size: 12px; margin-bottom: 5px;">Level 2</label>
+                                <select class="filter-select" id="level2Filter" multiple size="4" onchange="handleLevelChange(2)">
+                                    <option value="ALL" selected>All Level 2</option>
+                                </select>
+                                <div class="filter-actions">
+                                    <button class="filter-btn" onclick="selectAllLevel(2)">All</button>
+                                    <button class="filter-btn" onclick="clearAllLevel(2)">Clear</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="filter-label" style="font-size: 12px; margin-bottom: 5px;">Level 3</label>
+                                <select class="filter-select" id="level3Filter" multiple size="4" onchange="handleLevelChange(3)">
+                                    <option value="ALL" selected>All Level 3</option>
+                                </select>
+                                <div class="filter-actions">
+                                    <button class="filter-btn" onclick="selectAllLevel(3)">All</button>
+                                    <button class="filter-btn" onclick="clearAllLevel(3)">Clear</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="filter-label" style="font-size: 12px; margin-bottom: 5px;">Facilities (Level 4+)</label>
+                                <select class="filter-select" id="level4Filter" multiple size="4">
+                                    <option value="ALL" selected>All Facilities</option>
+                                </select>
+                                <div class="filter-actions">
+                                    <button class="filter-btn" onclick="selectAllLevel(4)">All</button>
+                                    <button class="filter-btn" onclick="clearAllLevel(4)">Clear</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -933,6 +987,8 @@
             config: null, 
             isLoggedIn: false,
             orgUnits: [],
+            orgUnitsByLevel: { 1: [], 2: [], 3: [], 4: [] },
+            orgUnitsHierarchy: {},
             charts: {},
             currentData: []
         };
@@ -998,49 +1054,153 @@
 
         async function loadOrganisationUnits() {
             try {
-                addActivityLog('Loading organisation units...');
-                const url = `${state.config.instanceUrl}/api/organisationUnits.json?fields=id,displayName&paging=false`;
+                addActivityLog('Loading organisation units hierarchy...');
+                const url = `${state.config.instanceUrl}/api/organisationUnits.json?fields=id,displayName,level,parent[id]&paging=false`;
                 const response = await fetchWithAuth(url);
                 if (!response.ok) throw new Error('Failed to fetch organisation units');
                 const data = await response.json();
                 state.orgUnits = data.organisationUnits || [];
-                const select = document.getElementById('orgUnitFilter');
-                select.innerHTML = '<option value="ALL">All Organisation Units</option>';
+                
+                // Organize by level and build hierarchy
+                state.orgUnitsByLevel = { 1: [], 2: [], 3: [], 4: [] };
+                state.orgUnitsHierarchy = {};
+                
                 state.orgUnits.forEach(ou => {
-                    const option = document.createElement('option');
-                    option.value = ou.id;
-                    option.textContent = ou.displayName;
-                    select.appendChild(option);
+                    const level = ou.level || 1;
+                    if (level <= 3) {
+                        state.orgUnitsByLevel[level].push(ou);
+                    } else {
+                        state.orgUnitsByLevel[4].push(ou);
+                    }
+                    
+                    // Build hierarchy mapping
+                    state.orgUnitsHierarchy[ou.id] = {
+                        ...ou,
+                        parentId: ou.parent ? ou.parent.id : null
+                    };
                 });
-                addActivityLog(`Loaded ${state.orgUnits.length} organisation units`);
+                
+                // Populate level filters
+                populateLevelFilter(1, state.orgUnitsByLevel[1]);
+                populateLevelFilter(2, state.orgUnitsByLevel[2]);
+                populateLevelFilter(3, state.orgUnitsByLevel[3]);
+                populateLevelFilter(4, state.orgUnitsByLevel[4]);
+                
+                addActivityLog(`Loaded ${state.orgUnits.length} organisation units across ${Object.keys(state.orgUnitsByLevel).length} levels`);
             } catch (error) {
                 console.error('Error loading org units:', error);
                 addActivityLog(`Error loading org units: ${error.message}`);
             }
         }
 
-        function selectAllOrgUnits() {
-            const select = document.getElementById('orgUnitFilter');
+        function populateLevelFilter(level, orgUnits) {
+            const select = document.getElementById(`level${level}Filter`);
+            if (!select) return;
+            
+            const levelNames = {
+                1: 'Level 1',
+                2: 'Level 2', 
+                3: 'Level 3',
+                4: 'Facilities'
+            };
+            
+            select.innerHTML = `<option value="ALL">All ${levelNames[level]}</option>`;
+            orgUnits.forEach(ou => {
+                const option = document.createElement('option');
+                option.value = ou.id;
+                option.textContent = ou.displayName;
+                select.appendChild(option);
+            });
+        }
+
+        function selectAllLevel(level) {
+            const select = document.getElementById(`level${level}Filter`);
+            if (!select) return;
             for (let i = 0; i < select.options.length; i++) {
                 select.options[i].selected = true;
             }
+            handleLevelChange(level);
         }
 
-        function clearAllOrgUnits() {
-            const select = document.getElementById('orgUnitFilter');
+        function clearAllLevel(level) {
+            const select = document.getElementById(`level${level}Filter`);
+            if (!select) return;
             for (let i = 0; i < select.options.length; i++) {
                 select.options[i].selected = false;
             }
             select.options[0].selected = true;
+            handleLevelChange(level);
+        }
+
+        function handleLevelChange(level) {
+            // When a parent level changes, filter child levels
+            if (level < 4) {
+                const selectedIds = getSelectedFromLevel(level);
+                filterChildLevel(level + 1, selectedIds);
+            }
+        }
+
+        function getSelectedFromLevel(level) {
+            const select = document.getElementById(`level${level}Filter`);
+            if (!select) return [];
+            
+            const selected = Array.from(select.selectedOptions).map(opt => opt.value);
+            if (selected.includes('ALL')) {
+                return state.orgUnitsByLevel[level].map(ou => ou.id);
+            }
+            return selected.filter(id => id !== 'ALL');
+        }
+
+        function filterChildLevel(childLevel, parentIds) {
+            if (childLevel > 4) return;
+            
+            const select = document.getElementById(`level${childLevel}Filter`);
+            if (!select) return;
+            
+            // If no parents selected or ALL selected, show all children
+            if (parentIds.length === 0 || parentIds.includes('ALL')) {
+                populateLevelFilter(childLevel, state.orgUnitsByLevel[childLevel]);
+                return;
+            }
+            
+            // Filter children based on parent selection
+            const filteredOrgUnits = state.orgUnitsByLevel[childLevel].filter(ou => {
+                return parentIds.includes(ou.parent?.id);
+            });
+            
+            populateLevelFilter(childLevel, filteredOrgUnits);
+        }
+
+        function selectAllOrgUnits() {
+            for (let level = 1; level <= 4; level++) {
+                selectAllLevel(level);
+            }
+        }
+
+        function clearAllOrgUnits() {
+            for (let level = 1; level <= 4; level++) {
+                clearAllLevel(level);
+            }
         }
 
         function getSelectedOrgUnits() {
-            const select = document.getElementById('orgUnitFilter');
-            const selected = Array.from(select.selectedOptions).map(opt => opt.value);
-            if (selected.includes('ALL')) {
+            // Get selected from all levels
+            let allSelected = [];
+            
+            for (let level = 1; level <= 4; level++) {
+                const levelSelected = getSelectedFromLevel(level);
+                allSelected = allSelected.concat(levelSelected);
+            }
+            
+            // Remove duplicates
+            allSelected = [...new Set(allSelected)];
+            
+            // If nothing selected, return all
+            if (allSelected.length === 0) {
                 return state.orgUnits.map(ou => ou.id);
             }
-            return selected.filter(id => id !== 'ALL');
+            
+            return allSelected;
         }
 
         function getPeriodFromFilters() {
@@ -1115,11 +1275,24 @@
             const currentYear = new Date().getFullYear();
             document.getElementById('yearFilter').value = currentYear;
             document.getElementById('monthFilter').value = '';
-            const select = document.getElementById('orgUnitFilter');
-            select.options[0].selected = true;
-            for (let i = 1; i < select.options.length; i++) {
-                select.options[i].selected = false;
+            
+            // Reset all level filters
+            for (let level = 1; level <= 4; level++) {
+                const select = document.getElementById(`level${level}Filter`);
+                if (select) {
+                    select.options[0].selected = true;
+                    for (let i = 1; i < select.options.length; i++) {
+                        select.options[i].selected = false;
+                    }
+                }
             }
+            
+            // Repopulate all levels to remove any filtering
+            populateLevelFilter(1, state.orgUnitsByLevel[1]);
+            populateLevelFilter(2, state.orgUnitsByLevel[2]);
+            populateLevelFilter(3, state.orgUnitsByLevel[3]);
+            populateLevelFilter(4, state.orgUnitsByLevel[4]);
+            
             showNotification('Filters reset', 'info');
         }
 
